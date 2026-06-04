@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Baby Blue AI Studio</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero card">
+      <div>
+        <p class="eyebrow">PRIVATE IMAGE STUDIO</p>
+        <h1>Baby Blue AI Studio</h1>
+        <p class="sub">Preset-based generator for OCs, character sheets, 3D T-pose model renders, green screen shots, and reference-image workflows.</p>
+      </div>
+      <div class="points-box">
+        <span>Daily points</span>
+        <strong id="pointsText">4000 / 4000</strong>
+        <small id="estimateText">About 800 generations left at 5 points each</small>
+      </div>
+    </section>
+
+    <section class="grid">
+      <form id="generateForm" class="card control-panel">
+        <label class="label" for="prompt">Prompt</label>
+        <textarea id="prompt" rows="8" placeholder="Example: Use my OC reference. Make a full-body 3D rendered T-pose model, front view only, plain white background, zoomed out to show the full body."></textarea>
+
+        <label class="label">Presets</label>
+        <div id="presetGrid" class="preset-grid"></div>
+
+        <div class="two-col">
+          <div>
+            <label class="label" for="size">Aspect ratio</label>
+            <select id="size">
+              <option value="1024x1024">Square 1:1</option>
+              <option value="1536x1024">Landscape 3:2</option>
+              <option value="1024x1536">Portrait 2:3</option>
+            </select>
+          </div>
+          <div>
+            <label class="label" for="quality">Quality</label>
+            <select id="quality">
+              <option value="medium">Medium</option>
+              <option value="high" selected>High</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="label" for="refs">Reference images</label>
+        <input id="refs" type="file" accept="image/png,image/jpeg,image/webp" multiple />
+        <div id="refPreview" class="ref-preview"></div>
+
+        <div class="actions">
+          <button class="primary" type="submit" id="generateBtn">Generate -5 points</button>
+          <button class="secondary" type="button" id="clearBtn">Clear</button>
+        </div>
+        <p class="note">API key stays on the backend. Do not put it inside app.js.</p>
+      </form>
+
+      <section class="card result-panel">
+        <div class="result-header">
+          <div>
+            <p class="eyebrow">OUTPUT</p>
+            <h2 id="statusTitle">Ready</h2>
+          </div>
+          <span id="statusPill" class="pill">Idle</span>
+        </div>
+
+        <div id="imageStage" class="image-stage">
+          <p>Your generated image will appear here.</p>
+        </div>
+
+        <div class="review-actions">
+          <button class="secondary" id="likeBtn" disabled>Like & save</button>
+          <button class="danger" id="dislikeBtn" disabled>Dislike & refund</button>
+          <button class="secondary" id="redoBtn" disabled>Redo</button>
+          <a class="download hidden" id="downloadBtn" download="baby-blue-ai-output.png">Download</a>
+        </div>
+      </section>
+    </section>
+
+    <section class="card gallery-card">
+      <div class="result-header">
+        <div>
+          <p class="eyebrow">SAVED</p>
+          <h2>Gallery</h2>
+        </div>
+        <button class="secondary small" id="clearGalleryBtn">Clear gallery</button>
+      </div>
+      <div id="gallery" class="gallery"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
